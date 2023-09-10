@@ -54,18 +54,17 @@ jobs:
             unzip awscliv2.zip
             sudo ./aws/install
       - run:
-          name: build-docker-image
+          name: Build docker image
           command: |
             aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set region $AWS_DEFAULT_REGION
-            aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 796682673745.dkr.ecr.us-east-1.amazonaws.com
+            aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_URL
             docker build -t capstone .
             docker tag capstone:latest $AWS_ECR_URL/capstone:latest
       - run:
-          name: push-docker-image-to-ecr
+          name: Push image to public ECR
           command: |
-            #push image
             docker push $AWS_ECR_URL/capstone:latest
   
 workflows:
