@@ -104,10 +104,6 @@ jobs:
       - run:
           name: Deploy cluster
           command: |
-            # curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.27.4/2023-08-16/bin/linux/amd64/kubectl
-            # chmod +x ./kubectl
-            # mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
-            # echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc
             eksctl create cluster \
             --name capstone \
             --region $AWS_DEFAULT_REGION \
@@ -160,8 +156,8 @@ workflows:
       - linting
       - build:
           requires: [linting]
-      - deploy-infrastructure:
-          requires: [build]
+      # - deploy-infrastructure:
+      #     requires: [build]
       - deploy-config:
           requires: [deploy-infrastructure] 
       
