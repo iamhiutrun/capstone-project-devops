@@ -161,7 +161,7 @@ workflows:
       - build:
           requires: [linting]
       - deploy-infrastructure:
-          requires: [build-image]
+          requires: [build]
       - deploy-config:
           requires: [deploy-infrastructure]
       
