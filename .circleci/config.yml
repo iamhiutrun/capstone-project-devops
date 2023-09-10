@@ -163,7 +163,7 @@ workflows:
       - deploy-infrastructure:
           requires: [build]
       - deploy-config:
-          requires: [deploy-infrastructure]
+          requires: [deploy-infrastructure] 
       
       
 
