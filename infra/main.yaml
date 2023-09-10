@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: capstone-deployment
+  labels:
+    app: capstone-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: capstone-service
+  template:
+    metadata:
+      labels:
+        app: capstone-service
+    spec:
+      containers:
+      - name: web
+        image: public.ecr.aws/h5f2n4z4/devops:latest
+        ports:
+          - name: web
+            containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: loadbalancer
+spec:
+  selector:
+    app: capstone-service
+  type: LoadBalancer
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
