@@ -60,12 +60,12 @@ jobs:
             aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
             aws configure set region $AWS_DEFAULT_REGION
             aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin $AWS_ECR_URL
-            docker build -t capstone .
-            docker tag capstone:latest $AWS_ECR_URL/capstone:latest
+            docker build -t devops .
+            docker tag devops:latest $AWS_ECR_URL/devops:latest
       - run:
           name: Push image to public ECR
           command: |
-            docker push $AWS_ECR_URL/capstone:latest
+            docker push $AWS_ECR_URL/devops:latest
   
 workflows:
   default:
