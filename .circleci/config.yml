@@ -156,8 +156,8 @@ workflows:
       - linting
       - build:
           requires: [linting]
-      # - deploy-infrastructure:
-      #     requires: [build]
+      - deploy-infrastructure:
+          requires: [build]
       - deploy-config:
           requires: [deploy-infrastructure] 
       
