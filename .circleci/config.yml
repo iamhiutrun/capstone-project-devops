@@ -154,12 +154,12 @@ workflows:
   default:
     jobs:
       - linting
-      # - build:
-      #     requires: [linting]
-      # - deploy-infrastructure:
-      #     requires: [build]
-      # - deploy-config:
-      #     requires: [deploy-infrastructure] 
+      - build:
+          requires: [linting]
+      - deploy-infrastructure:
+          requires: [build]
+      - deploy-config:
+          requires: [deploy-infrastructure] 
       
       
 
